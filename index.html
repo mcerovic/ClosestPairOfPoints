@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Closest pair of points </title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="mainDiv">
+    <div id="optionsDiv">
+      <button type="button" onclick="startAnimation()" name="button"> Start animation </button>
+      <button type="button" onclick="clearCanvas()" name="button"> Clear screen </button>
+      <span id="animationSpeedSpan"> Animation speed (<span id="range">1000</span> ms) : </span>
+      <input id="animationSpeed" type="range" min="100" max="2000" value="1000" step="100" onchange="showValue(this.value)"/>
+      <button type="button" onclick="randomizePoints()" name="button"> Randomize </button>
+      <span> Number of points : </span>
+      <input id="numberOfPoints" type="text" name="name" value="100"/>
+      <span id="distanceSpan"> Distance between closest pair of points is : <span id="disatnce">None</span></span>
+    </div>
+    <div id="animationDiv">
+      <canvas id="imgCanvas" width="897" height="747" onclick="draw(event)"></canvas>
+    </div>
+    <div id="algorithmDiv">
+      <p id="1"> Test </p>
+      <p id="2"> Test </p>
+      <p id="3"> Test </p>
+      <p id="4"> Test </p>
+      <p id="5"> Test </p>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
