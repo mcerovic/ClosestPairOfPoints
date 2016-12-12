@@ -1,8 +1,6 @@
-
-
 var canvas = document.getElementById("imgCanvas");
-var numberOfPoints = document.getElementById("numberOfPoints");
 var context = canvas.getContext("2d");
+
 var points = [];
 
 randomizePoints();
@@ -20,6 +18,7 @@ function drawLine(xPosition, dashed) {
   else {
     context.setLineDash([0, 0]);
   }
+
   context.beginPath();
   context.moveTo(xPosition + 0.5, 0);
   context.lineTo(xPosition + 0.5, canvas.height);
@@ -27,6 +26,7 @@ function drawLine(xPosition, dashed) {
 }
 
 function drawLineDistance(pointA, pointB) {
+
   context.setLineDash([5, 3]);
   context.beginPath();
   context.moveTo(pointA.x + 0.5, pointA.y + 0.5);
@@ -45,6 +45,7 @@ function drawLineDistance(pointA, pointB) {
 }
 
 function drawCircle(pointA, minDistance) {
+
   context.beginPath();
   context.setLineDash([0, 0]);
   context.globalAlpha = 0.5;
@@ -58,6 +59,7 @@ function drawCircle(pointA, minDistance) {
 }
 
 function drawRectangle(separationPoint) {
+
   context.globalAlpha = 0.2;
   context.fillStyle="#FF0000";
   context.fillRect(0, 0, separationPoint, canvas.height);
@@ -67,7 +69,9 @@ function drawRectangle(separationPoint) {
 }
 
 function draw(e) {
+
   var pos = getMousePos(canvas, e);
+
   context.fillStyle = "#000000";
   context.beginPath();
   context.arc(pos.x, pos.y, 2, 0, 2 * Math.PI);
@@ -76,6 +80,7 @@ function draw(e) {
 }
 
 function drawPoint(x, y) {
+
   context.fillStyle = "#000000";
   context.beginPath();
   context.arc(x, y, 2, 0, 2 * Math.PI);
@@ -83,24 +88,35 @@ function drawPoint(x, y) {
 }
 
 function getMousePos(canvas, evt) {
+
   var rect = canvas.getBoundingClientRect();
+
   return {
     x: evt.clientX - rect.left,
     y: evt.clientY - rect.top
   };
 }
 
-function showValue(newValue) {
-	document.getElementById("range").innerHTML = newValue;
+// Set value for range
+function showValue(value) {
+	document.getElementById("range").innerHTML = value;
 }
 
+// Set minimum distance at
 function setMinDistance(value) {
   document.getElementById("disatnce").innerHTML = value;
+}
+
+function sleepFor(sleepDuration) {
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
 
 function randomizePoints() {
 
   console.log("Randomize points");
+
+  var numberOfPoints = document.getElementById("numberOfPoints");
 
   // Clear canvas and points
   clearCanvas();
@@ -116,8 +132,8 @@ function randomizePoints() {
 }
 
 function markLine(lineId) {
-  for (var i = 0; i < 5; i++) {
-    document.getElementById("1").className = "";
+  for (var i = 1; i <= 6; i++) {
+    document.getElementById(i).className = "";
   }
   document.getElementById(lineId).className = "marked";
 }
@@ -132,7 +148,8 @@ function startAnimation() {
     drawRectangle(250);
     drawLineDistance(points[4], points[14]);
     drawCircle(points[10], 100);
-    markLine("3");
+    markLine("2");
+    setTimeout(function(){ markLine("3"); }, 1000);
     setMinDistance(betterSolutin());
   }
 }

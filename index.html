@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title> Closest pair of points </title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"> </script>
+  <script> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, CommonHTML: {scale: 100}});</script>
 </head>
 <body>
   <div id="mainDiv">
@@ -11,7 +13,7 @@
       <button type="button" onclick="startAnimation()" name="button"> Start animation </button>
       <button type="button" onclick="clearCanvas()" name="button"> Clear screen </button>
       <span id="animationSpeedSpan"> Animation speed (<span id="range">1000</span> ms) : </span>
-      <input id="animationSpeed" type="range" min="100" max="2000" value="1000" step="100" onchange="showValue(this.value)"/>
+      <input id="animationSpeed" type="range" min="100" max="4000" value="1000" step="100" onchange="showValue(this.value)"/>
       <button type="button" onclick="randomizePoints()" name="button"> Randomize </button>
       <span> Number of points : </span>
       <input id="numberOfPoints" type="text" name="name" value="100"/>
@@ -21,13 +23,35 @@
       <canvas id="imgCanvas" width="897" height="747" onclick="draw(event)"></canvas>
     </div>
     <div id="algorithmDiv">
-      <p id="1"> Test </p>
-      <p id="2"> Test </p>
-      <p id="3"> Test </p>
-      <p id="4"> Test </p>
-      <p id="5"> Test </p>
+      <p id="1"> Closest-Pair (xP, yP) </p>
+      <p id="2"> if $ N \leq 3 $ then </p>
+      <p id="3" style="padding-left: 20px;"> return closest points of xP using brute-force algorithm </p>
+      <p id="4"> else </p>
+      <p id="5"> xL ← points of xP from 1 to ⌈N/2⌉ </p>
+      <p id="6"> xR ← points of xP from ⌈N/2⌉+1 to N </p>
+      <p style="padding-left: 20px;"> xm ← xP(⌈N/2⌉)x </p>
+      <p style="padding-left: 20px;"> yL ← { p ∈ yP : px ≤ xm } </p>
+      <p style="padding-left: 20px;"> yR ← { p ∈ yP : px > xm } </p>
+      <p style="padding-left: 20px;"> (dL, pairL) ← closestPair of (xL, yL) </p>
+      <p style="padding-left: 20px;"> (dR, pairR) ← closestPair of (xR, yR) </p>
+      <p style="padding-left: 20px;"> (dmin, pairMin) ← (dR, pairR) </p>
+      <p style="padding-left: 20px;"> if dL < dR then </p>
+      <p style="padding-left: 40px;"> (dmin, pairMin) ← (dL, pairL) </p>
+      <p style="padding-left: 20px;"> yS ← { p ∈ yP : |xm - px| < dmin } </p>
+      <p style="padding-left: 20px;"> nS ← number of points in yS </p>
+      <p style="padding-left: 20px;"> (closest, closestPair) ← (dmin, pairMin) </p>
+      <p style="padding-left: 20px;"> for i from 1 to nS - 1 </p>
+      <p style="padding-left: 40px;"> k ← i + 1 </p>
+      <p style="padding-left: 40px;"> while k ≤ nS and yS(k)y - yS(i)y < dmin </p>
+      <p style="padding-left: 60px;"> if |yS(k) - yS(i)| < closest then </p>
+      <p style="padding-left: 80px;"> (closest, closestPair) ← (|yS(k) - yS(i)|, {yS(k), yS(i)}) </p>
+      <p style="padding-left: 60px;"> k ← k + 1 </p>
+      <p> return closest, closestPair </p>
     </div>
   </div>
+  <p style="width: 1400px; margin: 40px auto 0 auto;">
+    Created by Milutin Cerovic RN51/2015, <a href="#"> Presentation and help </a>
+  </p>
   <script src="main.js"></script>
 </body>
 </html>
