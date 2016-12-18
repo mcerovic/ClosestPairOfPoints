@@ -5,53 +5,49 @@
   <title> Closest pair of points </title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"> </script>
-  <script> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, CommonHTML: {scale: 100}});</script>
+  <script> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}, CommonHTML: {scale: 105}});</script>
 </head>
 <body>
   <div id="mainDiv">
     <div id="optionsDiv">
-      <button type="button" onclick="startAnimation()" name="button"> Start animation </button>
-      <button type="button" onclick="clearCanvas()" name="button"> Clear screen </button>
-      <span id="animationSpeedSpan"> Animation speed (<span id="range">1000</span> ms) : </span>
-      <input id="animationSpeed" type="range" min="100" max="4000" value="1000" step="100" onchange="showValue(this.value)"/>
-      <button type="button" onclick="randomizePoints()" name="button"> Randomize </button>
+      <button type="button" id="startStopButton" onclick="startAnimation()" name="button"> Start animation </button>
+      <button type="button" onclick="clearPointsAndCanvas()" name="button"> Clear points </button>
       <span> Number of points : </span>
-      <input id="numberOfPoints" type="text" name="name" value="100"/>
+      <input id="numberOfPoints" type="text" name="name" value="15"/>
+      <button type="button" onclick="randomizePoints()" name="button"> Randomize </button>
+      <span id="animationSpeedSpan"> Animation speed (<span id="range">1000</span> ms) : </span>
+      <input id="animationSpeed" type="range" min="100" max="4000" value="500" step="100" onchange="setAnimationSpeed(this.value)"/>
       <span id="distanceSpan"> Distance between closest pair of points is : <span id="disatnce">None</span></span>
     </div>
     <div id="animationDiv">
       <canvas id="imgCanvas" width="897" height="747" onclick="draw(event)"></canvas>
     </div>
     <div id="algorithmDiv">
-      <p id="1"> Closest-Pair (xP, yP) </p>
-      <p id="2"> if $ N \leq 3 $ then </p>
-      <p id="3" style="padding-left: 20px;"> return closest points of xP using brute-force algorithm </p>
-      <p id="4"> else </p>
-      <p id="5"> xL ← points of xP from 1 to ⌈N/2⌉ </p>
-      <p id="6"> xR ← points of xP from ⌈N/2⌉+1 to N </p>
-      <p style="padding-left: 20px;"> xm ← xP(⌈N/2⌉)x </p>
-      <p style="padding-left: 20px;"> yL ← { p ∈ yP : px ≤ xm } </p>
-      <p style="padding-left: 20px;"> yR ← { p ∈ yP : px > xm } </p>
-      <p style="padding-left: 20px;"> (dL, pairL) ← closestPair of (xL, yL) </p>
-      <p style="padding-left: 20px;"> (dR, pairR) ← closestPair of (xR, yR) </p>
-      <p style="padding-left: 20px;"> (dmin, pairMin) ← (dR, pairR) </p>
-      <p style="padding-left: 20px;"> if dL < dR then </p>
-      <p style="padding-left: 40px;"> (dmin, pairMin) ← (dL, pairL) </p>
-      <p style="padding-left: 20px;"> yS ← { p ∈ yP : |xm - px| < dmin } </p>
-      <p style="padding-left: 20px;"> nS ← number of points in yS </p>
-      <p style="padding-left: 20px;"> (closest, closestPair) ← (dmin, pairMin) </p>
-      <p style="padding-left: 20px;"> for i from 1 to nS - 1 </p>
-      <p style="padding-left: 40px;"> k ← i + 1 </p>
-      <p style="padding-left: 40px;"> while k ≤ nS and yS(k)y - yS(i)y < dmin </p>
-      <p style="padding-left: 60px;"> if |yS(k) - yS(i)| < closest then </p>
-      <p style="padding-left: 80px;"> (closest, closestPair) ← (|yS(k) - yS(i)|, {yS(k), yS(i)}) </p>
-      <p style="padding-left: 60px;"> k ← k + 1 </p>
-      <p> return closest, closestPair </p>
+      <p> Closest-Pair $(P_{x}, P_{y})$ </p>
+      <p id="1"> if $ N \leq 3 $ then </p>
+      <p id="2" style="padding-left: 20px;"> return closest points of $Px$ using brute-force algorithm </p>
+      <p id="3"> else </p>
+      <p id="4" style="padding-left: 20px;"> $m \leftarrow P_{x}(\lceil \frac{N}{2} \rceil) $ </p>
+      <p id="5" style="padding-left: 20px;"> $L_{y} \leftarrow \{ p \in P_{y} : p.x \leq m.x \} $ </p>
+      <p id="6" style="padding-left: 20px;"> $R_{y} \leftarrow \{ p \in P_{y} : p.x \gt m.x \} $ </p>
+      <p id="7" style="padding-left: 20px;"> $L_{x} \leftarrow $ points of $P_{x}$ from $ 1, \dots , \lceil \frac{N}{2} \rceil $ </p>
+      <p id="8" style="padding-left: 20px;"> $R_{x} \leftarrow $ points of $P_{x}$ from $ \lceil \frac{N}{2} \rceil + 1, \dots, N $ </p>
+      <p id="9" style="padding-left: 20px;"> $d_{L} \leftarrow $ Closest-Pair $(L_{x}, L_{y})$ </p>
+      <p id="10" style="padding-left: 20px;"> $d_{R} \leftarrow $ Closest-Pair $(R_{x}, R_{y})$ </p>
+      <p id="11" style="padding-left: 20px;"> $d_{min} \leftarrow \min \{ d_{L}, d_{R} \} $ </p>
+      <p id="12" style="padding-left: 20px;"> $strip \leftarrow \{ p \in P_{y} : | m.x - p.x | \lt d_{min} \} $ </p>
+      <p id="13" style="padding-left: 20px;"> $s_{min} \leftarrow d_{min} $ </p>
+      <p id="14" style="padding-left: 20px;"> for $i = 0$ to $|strip| - 1$ </p>
+      <p id="15" style="padding-left: 40px;"> for $j = i + 1$ to $j \lt |strip|$ and $(strip[j].y - strip[i].y) < s_{min}$ </p>
+      <p id="16" style="padding-left: 60px;"> $dist \leftarrow \| strip[j] - strip[i] \|_{2} $ </p>
+      <p id="17" style="padding-left: 60px;"> if $dist \lt s_{min}$ then </p>
+      <p id="18" style="padding-left: 80px;"> $s_{min} \leftarrow dist $ </p>
+      <p id="19"> return $ \min \{d_{min}, s_{min} \} $ </p>
+      <p style="top: 100%; position:absolute; margin-top: -30px;">
+        Created and implemented by mcerovic, <a href="#">Help</a>
+      </p>
     </div>
   </div>
-  <p style="width: 1400px; margin: 40px auto 0 auto;">
-    Created by Milutin Cerovic RN51/2015, <a href="#"> Presentation and help </a>
-  </p>
   <script src="main.js"></script>
 </body>
 </html>

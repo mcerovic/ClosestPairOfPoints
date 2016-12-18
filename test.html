@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+
+    // function sleep(seconds){
+    //   var waitUntil = new Date().getTime() + seconds;
+    //   while(new Date().getTime() < waitUntil) true;
+    // }
+    //
+    // function demo() {
+    //   console.log('Taking a break...');
+    //   sleep(2000);
+    //   console.log('Two second later');
+    // }
+    //
+    // demo();
+
+
+    var i = middle.length ;
+    function myLoop () {
+      setTimeout(function () {
+        clearCanvas();
+        drawAllPoints();
+        drawLine(middle[i].x);
+        drawRectangle(middle[i].x);
+        i--;
+        if (i > 0) {
+          myLoop();
+        }
+      }, 1000)
+    }
+
+    myLoop(NULL);
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
