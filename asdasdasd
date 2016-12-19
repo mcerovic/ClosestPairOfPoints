@@ -155,28 +155,30 @@ function markLine(lineId) {
   }
 }
 
+var algorithmAnimationCount = 1;
 var pseudoCodeCount = 1;
 var minimumDistance = 0;
 
-var myVar = [];;
+var myVar = 0;
+var myVar1 = 0;
 
 function animatePseudoCode(func, param) {
-  myVar.push(setTimeout(function() {
+  myVar = setTimeout(function() {
     func(param);
-  }, pseudoCodeCount * animationSpeed));
+  }, pseudoCodeCount * animationSpeed);
   pseudoCodeCount++;
 }
 
 function animateAlgorithm(func, param) {
   param = param || null;
-  myVar.push(setTimeout(function() {
+  myVar = setTimeout(function() {
     if(param != null) {
       func(param);
     }
     else {
       func();
     }
-  }, (pseudoCodeCount - 1) * animationSpeed));
+  }, (pseudoCodeCount - 1) * animationSpeed);
 }
 
 
@@ -229,11 +231,8 @@ function closestPair(Px, Py) {
 
   // if N <= 3 then
   animatePseudoCode(markLine, 1);
-
   if (n <= 3) {
-
     animatePseudoCode(markLine, 2);
-
     // Brute force
     var min = Number.MAX_VALUE;
     var min_i, min_j;
@@ -261,6 +260,7 @@ function closestPair(Px, Py) {
   var m = Px[mid];
 
   if(n > 3) {
+    algorithmAnimationCount = pseudoCodeCount - 1;
     animateAlgorithm(clearCanvas);
     animateAlgorithm(drawAllPoints);
     animateAlgorithm(drawLine, [m.x, false]);
@@ -276,27 +276,26 @@ function closestPair(Px, Py) {
     else
       Ry.push(Py[i])
 
-  // Draw rectangle for left subset of points
-  animatePseudoCode(markLine, 7);
-  if(n > 3)
-    animateAlgorithm(drawLeftRectangle, [Px[0].x, m.x]);
-
   // Left subset of points
+  animatePseudoCode(markLine, 7);
+  if(n > 3) {
+    algorithmAnimationCount = pseudoCodeCount - 1;
+    animateAlgorithm(drawLeftRectangle, [Px[0].x, m.x]);
+  }
   var Lx = Px.slice(0, mid + 1); // var Lx = Px.slice(0, mid);
 
-  // Draw rectangle for right subset of points
-  animatePseudoCode(markLine, 8);
-  if(n > 3)
-    animateAlgorithm(drawRightRectangle, [m.x, Px[Px.length - 1].x]);
-
   // Right subset of points
+  animatePseudoCode(markLine, 8);
+  if(n > 3) {
+    algorithmAnimationCount = pseudoCodeCount - 1;
+    animateAlgorithm(drawRightRectangle, [m.x, Px[Px.length - 1].x]);
+  }
   var Rx = Px.slice(mid); // var Rx = Px.slice(mid);
 
   // Call closest pair for the left side
-  var dL = closestPair(Lx, Ly);
-
-  // Animate closest pair for the left side
   animatePseudoCode(markLine, 9);
+  var dL = closestPair(Lx, Ly);
+  algorithmAnimationCount = pseudoCodeCount - 1;
   animateAlgorithm(clearCanvas);
   animateAlgorithm(drawAllPoints);
   animateAlgorithm(drawLineDistance, [dL[1], dL[2]]);
@@ -305,10 +304,10 @@ function closestPair(Px, Py) {
   animateAlgorithm(drawRightRectangle, [m.x, Px[Px.length - 1].x]);
 
   // Call closest pair for the right side
+  animatePseudoCode(markLine, 10);
   var dR = closestPair(Rx, Ry);
 
-  // Animate closest pair for the right side
-  animatePseudoCode(markLine, 10);
+  algorithmAnimationCount = pseudoCodeCount - 1;
   animateAlgorithm(clearCanvas);
   animateAlgorithm(drawAllPoints);
   animateAlgorithm(drawLineDistance, [dL[1], dL[2]]);
@@ -321,7 +320,7 @@ function closestPair(Px, Py) {
   animatePseudoCode(markLine, 11);
   // var d_min = Math.min(dL, dR);
   var d_min = dL[0] < dR[0] ? dL : dR;
-
+  algorithmAnimationCount = pseudoCodeCount - 1;
   animateAlgorithm(clearCanvas);
   animateAlgorithm(drawAllPoints);
   animateAlgorithm(drawLineDistance, [d_min[1], d_min[2]]);
@@ -366,17 +365,20 @@ function startAnimation() {
     alert("Please add at least 2 points");
   else {
 
-    for (var i = 0; i <= myVar.length; i++) {
-      clearTimeout(myVar[i]);
+    for (var i = 1; i <= myVar; i++) {
+      console.log(i);
+      clearTimeout(i);
     }
-    pseudoCodeCount = 1;
-    minimumDistance = 0;
+
+    for (var i = 1; i <= myVar1; i++) {
+      clearTimeout(i);
+    }
 
     document.getElementById("startButton").disabled = true;
 
     minimumDistance = closestPairUtil();
     setMinDistance(minimumDistance[0]);
-
+    algorithmAnimationCount = pseudoCodeCount - 1;
     animatePseudoCode(markLine, 0);
     animateAlgorithm(clearCanvas);
     animateAlgorithm(drawAllPoints);

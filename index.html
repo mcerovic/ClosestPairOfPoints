@@ -10,7 +10,7 @@
 <body>
   <div id="mainDiv">
     <div id="optionsDiv">
-      <button type="button" id="startStopButton" onclick="startAnimation()" name="button"> Start animation </button>
+      <button type="button" id="startButton" onclick="startAnimation()" name="button"> Start animation </button>
       <button type="button" onclick="clearPointsAndCanvas()" name="button"> Clear points </button>
       <span> Number of points : </span>
       <input id="numberOfPoints" type="text" name="name" value="15"/>
@@ -42,9 +42,9 @@
       <p id="16" style="padding-left: 60px;"> $dist \leftarrow \| strip[j] - strip[i] \|_{2} $ </p>
       <p id="17" style="padding-left: 60px;"> if $dist \lt s_{min}$ then </p>
       <p id="18" style="padding-left: 80px;"> $s_{min} \leftarrow dist $ </p>
-      <p id="19"> return $ \min \{d_{min}, s_{min} \} $ </p>
+      <p id="19" style="padding-left: 20px;"> return $ \min \{d_{min}, s_{min} \} $ </p>
       <p style="top: 100%; position:absolute; margin-top: -30px;">
-        Created and implemented by mcerovic, <a href="#">Help</a>
+        Created and implemented by mcerovic, <a href="help.html">Help</a>
       </p>
     </div>
   </div>
