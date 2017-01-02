@@ -10,14 +10,16 @@
 <body>
   <div id="mainDiv">
     <div id="optionsDiv">
-      <button type="button" id="startButton" onclick="startAnimation()" name="button"> Start animation </button>
-      <button type="button" onclick="clearPointsAndCanvas()" name="button"> Clear points </button>
+      <button type="button" id="startButton" onclick="start()"> Start animation </button>
+      <button type="button" id="stepBackButton" onclick="stepBack()"> Step back </button>
+      <button type="button" id="stepForwardButton" onclick="stepForward()"> Step forward </button>
+      <button type="button" onclick="clearPointsAndCanvas()"> Reset </button>
       <span> Number of points : </span>
-      <input id="numberOfPoints" type="text" name="name" value="15"/>
-      <button type="button" onclick="randomizePoints()" name="button"> Randomize </button>
+      <input id="numberOfPoints" type="text" name="name" value="30"/>
+      <button type="button" onclick="randomizePoints()" name="button"> Randomize points </button>
       <span id="animationSpeedSpan"> Animation speed (<span id="range">1000</span> ms) : </span>
       <input id="animationSpeed" type="range" min="100" max="4000" value="500" step="100" onchange="setAnimationSpeed(this.value)"/>
-      <span id="distanceSpan"> Distance between closest pair of points is : <span id="disatnce">None</span></span>
+      <span id="distanceSpan"> Min distance : <span id="disatnce">None</span></span>
     </div>
     <div id="animationDiv">
       <canvas id="imgCanvas" width="897" height="747" onclick="draw(event)"></canvas>
@@ -43,6 +45,12 @@
       <p id="17" style="padding-left: 60px;"> if $dist \lt s_{min}$ then </p>
       <p id="18" style="padding-left: 80px;"> $s_{min} \leftarrow dist $ </p>
       <p id="19" style="padding-left: 20px;"> return $ \min \{d_{min}, s_{min} \} $ </p>
+      <p style="top: 100%; position:absolute; margin-top: -80px;">
+        Complexity : $O(n \log n)$
+      </p>
+      <p style="top: 100%; position:absolute; margin-top: -55px;">
+        Note : Arrays $P_{x}, P_{y}$ are arrays sorted by $x$ and $y$ coordinate, respectively.
+      </p>
       <p style="top: 100%; position:absolute; margin-top: -30px;">
         Created and implemented by mcerovic, <a href="help.html">Help</a>
       </p>
