@@ -229,7 +229,7 @@ function closestPair(Px, Py) {
             "param": [[4], null, null, [m.x, false]]
         });
     }
-
+    
     var Ly = [], Ry = [];
     animationList.push({"func": ["markLine"], "param": [[5]]});
     animationList.push({"func": ["markLine"], "param": [[6]]});
@@ -278,8 +278,6 @@ function closestPair(Px, Py) {
 
     // Minimum from the left and the right side
     animationList.push({"func": ["markLine"], "param": [[11]]});
-
-    // var d_min = Math.min(dL, dR);
     var d_min = dL[0] < dR[0] ? dL : dR;
 
     // Points in strip
@@ -381,6 +379,8 @@ function start() {
 
         if(startButton.innerHTML.trim().localeCompare("Start animation") == 0) {
             startButton.innerHTML = "Pause animation";
+            clearCanvas();
+            drawAllPoints();
             minimumDistance = closestPairUtil();
             startAnimation();
         }
