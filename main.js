@@ -229,7 +229,7 @@ function closestPair(Px, Py) {
             "param": [[4], null, null, [m.x, false]]
         });
     }
-    
+
     var Ly = [], Ry = [];
     animationList.push({"func": ["markLine"], "param": [[5]]});
     animationList.push({"func": ["markLine"], "param": [[6]]});
