@@ -1,2 +1,2 @@
 # ClosestPairOfPoints
-Closest pair of points problem visualization. Solved using Divide and Conquer strategy O(nlogn).
+Closest pair of points problem visualization. Solved using divide and conquer strategy O(nlogn).
